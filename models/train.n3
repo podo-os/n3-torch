@@ -1,0 +1,14 @@
+use LeNet
+
+use Adam
+use Linear
+use Image Classification
+
+[LeNet Trainer]
+
+  [Image Classification]
+    * [Optimizer] = Adam
+
+  #0 MNIST = [0: Icc, H, W], [1: Oc]
+  #1 LeNet (#0:0) = Oc
+  #2 Image Classification (#1, #0:1)

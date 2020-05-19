@@ -1,0 +1,16 @@
+[package]
+name = "n3-torch"
+version = "0.0.1"
+authors = ["h <besqer996@gnu.ac.kr>"]
+edition = "2018"
+
+description = "Super-Simple semantic neural network model compiler PyTorch back-end."
+homepage = "https://github.com/podo-os"
+repository = "https://github.com/podo-os/n3-torch"
+readme = "README.md"
+license = "BSD-3-Clause"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+n3-core = "0.1"

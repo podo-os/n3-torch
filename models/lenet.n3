@@ -1,0 +1,22 @@
+use Conv2d
+use Linear
+
+use ReLU
+use Softmax
+
+use Transform
+
+[LeNet]
+
+  [Conv2d]
+    * kernel size = 5
+    * stride = 2
+
+  [Softmax]
+    * axis = -1
+
+  #0 Input Gray image = Ic, H  , W
+  #1 Conv2d + ReLU    = 32, H/2, W/2
+  #2 Conv2d + ReLU    = 64, H/4, W/4
+  #3 Transform        = 64* H/4* W/4
+  #4 Linear + Softmax = Oc
