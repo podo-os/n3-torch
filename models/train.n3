@@ -10,5 +10,5 @@ use Image Classification
     * [Optimizer] = Adam
 
   #0 MNIST = [0: Icc, H, W], [1: Oc]
-  #1 LeNet (#0:0) = Oc
+  #1 LeNet (#0:0) = 10
   #2 Image Classification (#1, #0:1)

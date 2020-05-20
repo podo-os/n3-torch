@@ -3,10 +3,11 @@ use Linear
 
 use ReLU
 use Softmax
-
 use Transform
 
 [LeNet]
+
+  * N: number of channels = 10
 
   [Conv2d]
     * kernel size = 5
@@ -15,8 +16,8 @@ use Transform
   [Softmax]
     * axis = -1
 
-  #0 Input Gray image = Ic, H  , W
-  #1 Conv2d + ReLU    = 32, H/2, W/2
-  #2 Conv2d + ReLU    = 64, H/4, W/4
-  #3 Transform        = 64* H/4* W/4
-  #4 Linear + Softmax = Oc
+  #0 Input                =  1, 28, 28
+  #1 Conv2d (#0) + ReLU   = 32, 14, 14
+  #2 Conv2d      + ReLU   = 64,  7,  7
+  #3 Transform            = 64*  7*  7
+  #4 Linear + Softmax     =  N

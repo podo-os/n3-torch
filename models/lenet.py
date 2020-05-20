@@ -15,14 +15,16 @@ class Transform(nn.Module):
 
 class LeNet(nn.Module):
 
-    def __init__(self):
+    def __init__(self, number_of_channels: int):
         super().__init__()
+        self.number_of_channels = number_of_channels
+
         self.node_1_0 = nn.Conv2d(1, 32, kernel_size=5, padding=2, stride=2)
         self.node_1_1 = nn.ReLU()
         self.node_2_0 = nn.Conv2d(32, 64, kernel_size=5, padding=2, stride=2)
         self.node_2_1 = nn.ReLU()
         self.node_3_0 = Transform([64 * 7 * 7])
-        self.node_4_0 = nn.Linear(64 * 7 * 7, 10)
+        self.node_4_0 = nn.Linear(64 * 7 * 7, number_of_channels)
         self.node_4_1 = nn.Softmax(-1)
 
     def forward(self, x_input):
@@ -37,7 +39,7 @@ class LeNet(nn.Module):
 
 
 if __name__ == '__main__':
-    model = LeNet()
+    model = LeNet(10)
 
     data = torch.zeros(42, 1, 28, 28)
 

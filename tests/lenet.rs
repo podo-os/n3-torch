@@ -1,10 +1,21 @@
+use std::fs;
+use std::io::Write;
+
 use n3_core::*;
+use n3_torch_core::compile_graph;
 
 #[test]
-fn build_lenet() {
+#[cfg(not(target_arch = "wasm32"))]
+fn compile_lenet() {
     let mut root = GraphRoot::with_path("models").unwrap();
 
-    let graph = root.find_graph("LeNet", UseOrigin::Local).unwrap();
+    let module = compile_graph(&mut root, "LeNet", UseOrigin::Local).unwrap();
 
-    dbg!(graph.get_shapes());
+    let mut file = fs::File::create("out.py").unwrap();
+    write!(
+        &mut file,
+        "#! auto-generated file written by N3\n\n{}",
+        module
+    )
+    .unwrap();
 }
