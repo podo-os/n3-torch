@@ -1,6 +1,7 @@
 use std::fmt;
 
 use crate::module::TorchModule;
+use crate::writer;
 
 #[derive(Debug)]
 pub struct Transform;
@@ -14,7 +15,7 @@ impl super::super::base::ExternModuleImpl for Transform {
         let output = &module.output.as_ref().unwrap();
         let output = &output.0[0];
         for dim in &output.0 {
-            write!(f, "{}, ", dim)?;
+            writer::write_dim(f, dim)?;
         }
         Ok(())
     }

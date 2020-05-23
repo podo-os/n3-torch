@@ -14,4 +14,5 @@ license = "BSD-3-Clause"
 
 [dependencies]
 heck = "0.3"
-n3-core = "0.1"
+n3-core = "0.2"
+regex = "1"

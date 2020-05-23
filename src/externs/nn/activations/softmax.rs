@@ -12,7 +12,7 @@ impl super::super::super::base::ExternModuleImpl for Softmax {
     }
 
     fn write_params(&self, f: &mut fmt::Formatter<'_>, module: &TorchModule) -> fmt::Result {
-        let axis = module.variables["axis"];
+        let axis = module.variables["Axis"];
         write_param(f, "dim", axis.value.as_ref())
     }
 }

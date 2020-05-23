@@ -1,4 +1,4 @@
-use std::collections::{BTreeMap, HashMap};
+use std::collections::BTreeMap;
 use std::fmt;
 
 use crate::error::CompileError;
@@ -28,7 +28,7 @@ impl<'a> fmt::Display for TorchMainModule<'a> {
 #[derive(Debug)]
 pub struct TorchModule<'a> {
     pub(crate) name: &'a str,
-    pub(crate) variables: HashMap<String, &'a Variable>,
+    pub(crate) variables: BTreeMap<String, &'a Variable>,
     pub(crate) nodes: BTreeMap<GraphId, TorchSubModule<'a>>,
     pub(crate) input: Option<Shapes>,
     pub(crate) output: Option<Shapes>,
@@ -39,7 +39,7 @@ pub struct TorchModule<'a> {
 impl<'a> TorchModule<'a> {
     pub(crate) fn new_extern(
         name: &'a str,
-        variables: HashMap<String, &'a Variable>,
+        variables: BTreeMap<String, &'a Variable>,
     ) -> Result<Self, CompileError> {
         let guide = Guide::find_extern_guide(name)?;
 

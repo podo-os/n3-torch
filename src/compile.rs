@@ -5,7 +5,7 @@ use crate::guide::Guide;
 use crate::module::{TorchMainModule, TorchModule, TorchSubModule};
 use crate::shape::Shapes;
 
-use heck::SnakeCase;
+use heck::CamelCase;
 use n3_core::{Graph, GraphRoot, Node, UseOrigin, Variable};
 
 pub fn compile_graph<'a, 'b>(
@@ -85,10 +85,10 @@ impl<'a> Compile<'a> for Node {
 
 impl<'a> Compile<'a> for HashMap<String, Variable> {
     type Args = ();
-    type Output = HashMap<String, &'a Variable>;
+    type Output = BTreeMap<String, &'a Variable>;
 
     fn compile(&'a self, _: Self::Args) -> Result<Self::Output, CompileError> {
-        Ok(self.iter().map(|(k, v)| (k.to_snake_case(), v)).collect())
+        Ok(self.iter().map(|(k, v)| (k.to_camel_case(), v)).collect())
     }
 }
 
