@@ -12,7 +12,6 @@ pub fn write_dim(f: &mut fmt::Formatter<'_>, dim: &Dim) -> fmt::Result {
 
             let re_pe: Regex = Regex::new(r"var_(?P<v>\w+)").unwrap();
             let expr = re_pe.replace_all(expr, "self.$v");
-            dbg!(&expr);
 
             write!(f, "{}, ", expr)
         }

@@ -57,6 +57,20 @@ impl<'a> TorchModule<'a> {
 
 impl<'a> fmt::Display for TorchModule<'a> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let mut compiled_nodes = vec![];
+
+        for node in self.nodes.values() {
+            if node.0.guide.is_extern() {
+                continue;
+            }
+            if compiled_nodes.contains(&node.0.name) {
+                continue;
+            }
+
+            compiled_nodes.push(&node.0.name);
+            writeln!(f, "{}\n", node.0)?;
+        }
+
         writeln!(f, "class {}(nn.Module):", self.name)?;
 
         // constructor
@@ -89,7 +103,7 @@ impl<'a> fmt::Display for TorchModule<'a> {
             if let Some(args) = self.args {
                 for arg in args {
                     write!(f, "x_")?;
-                    writer::write_id_arg(f, arg)?;
+                    writer::write_input_args(f, arg.arg)?;
                 }
             }
             writeln!(f, "):")?;

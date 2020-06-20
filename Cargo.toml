@@ -14,5 +14,5 @@ license = "BSD-3-Clause"
 
 [dependencies]
 heck = "0.3"
-n3-core = "0.2"
+n3-core = { path = "../core" }
 regex = "1"

@@ -1,0 +1,57 @@
+use Conv2d
+use MaxPool2d
+
+use Linear
+
+use ReLU
+use Softmax
+use Transform
+
+use Dropout
+
+[VGG16]
+
+  * N: number of channels = 10
+  * BC: block channels = 32
+
+  [Softmax]
+    * axis = -1
+
+  [Step2]
+    * Oc: out channels
+
+    [Conv2d]
+      * kernel size = 3
+
+    [MaxPool2d]
+      * kernel size = 2
+
+    #0 Input         = Ic,   H,   W
+    #1 Conv2d + ReLU = Oc,   H,   W
+    #2 Conv2d + ReLU = Oc,   H,   W
+    #3 MaxPool2d     = Oc, H/2, W/2
+
+  [Step3]
+    * Oc: out channels
+
+    [Conv2d]
+      * kernel size = 3
+
+    [MaxPool2d]
+      * kernel size = 2
+
+    #0 Input         = Ic,   H,   W
+    #1 Conv2d + ReLU = Oc,   H,   W
+    #2 Conv2d + ReLU = Oc,   H,   W
+    #3 Conv2d + ReLU = Oc,   H,   W
+    #4 MaxPool2d     = Oc, H/2, W/2
+
+  #0 Input ImageNet          =    3, 224, 224
+  #1 Step2 (Oc= 64)          =   64, 112, 112
+  #2 Step2 (Oc=128)          =  128,  56,  56
+  #3 Step3 (Oc=256)          =  256,  28,  28
+  #4 Step3 (Oc=512) *2       =  512,   7,   7
+  #5 Transform               =  512*   7*   7
+  #6 Linear + ReLU + Dropout = 4096
+  #7 Linear + ReLU + Dropout = 4096
+  #8 Linear + Softmax        = 1000

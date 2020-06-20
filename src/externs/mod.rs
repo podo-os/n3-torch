@@ -12,6 +12,10 @@ pub fn find_extern_module(name: &str) -> Result<ExternModule, ExternError> {
 
         // conv
         "Conv2d" => Ok(Box::new(self::nn::conv::Conv2d)),
+        "MaxPool2d" => Ok(Box::new(self::nn::conv::MaxPool2d)),
+
+        // tensor
+        "Dropout" => Ok(Box::new(self::nn::dropout::Dropout)),
 
         // linear
         "Linear" => Ok(Box::new(self::nn::linear::Linear)),

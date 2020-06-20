@@ -8,6 +8,23 @@ use heck::SnakeCase;
 use n3_core::Value;
 
 #[derive(Debug)]
+pub struct MaxPool2d;
+
+impl super::super::base::ExternModuleImpl for MaxPool2d {
+    fn prefix(&self) -> &str {
+        "nn"
+    }
+
+    fn write_params(&self, f: &mut fmt::Formatter<'_>, module: &TorchModule) -> fmt::Result {
+        for (name, var) in &module.variables {
+            let value = var.value.as_ref();
+            write_param(f, &name.to_snake_case(), value)?;
+        }
+        Ok(())
+    }
+}
+
+#[derive(Debug)]
 pub struct Conv2d;
 
 impl super::super::base::ExternModuleImpl for Conv2d {

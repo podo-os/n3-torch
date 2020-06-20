@@ -21,4 +21,5 @@ use Transform
   #1 Conv2d (#0) + ReLU   =   BC, 14, 14
   #2 Conv2d      + ReLU   = BC*2,  7,  7
   #3 Transform            = BC*2*  7*  7
-  #4 Linear + Softmax     =    N
+  #4 Linear + ReLU        = 1024
+  #5 Linear + Softmax     =    N

@@ -14,6 +14,10 @@ pub fn write_id_args(f: &mut fmt::Formatter<'_>, id: &GraphId, num_args: usize) 
     Ok(())
 }
 
+pub fn write_input_args(f: &mut fmt::Formatter<'_>, arg: Option<u64>) -> fmt::Result {
+    write!(f, "input_{}", arg.unwrap_or(0))
+}
+
 pub fn write_id_arg(f: &mut fmt::Formatter<'_>, id_arg: &GraphIdArg) -> fmt::Result {
     if id_arg.id.is_input() {
         // FIXME: replace unwrap_or(0)

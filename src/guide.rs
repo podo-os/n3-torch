@@ -25,6 +25,13 @@ impl Guide {
         }
     }
 
+    pub fn is_extern(&self) -> bool {
+        match self {
+            Self::Extern(_) => true,
+            Self::NonExtern => false,
+        }
+    }
+
     fn write_name(&self, f: &mut fmt::Formatter<'_>, name: &str) -> fmt::Result {
         match self {
             Self::Extern(module) => module.write_name(f, name),
